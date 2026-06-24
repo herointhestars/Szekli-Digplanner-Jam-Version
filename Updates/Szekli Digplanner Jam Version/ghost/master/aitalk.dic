@@ -1,0 +1,106 @@
+OnAiTalk
+{
+	if CHAIN.IDName != ""
+	{
+		LastTalk = ChainTalk
+	}
+	else
+	{
+		LastTalk = RandomTalk
+	}
+	LastTalk
+}
+
+RandomTalk : nonoverlap_pool
+{
+	if bucketitem != "empty" && patience >= 3
+	{
+		if bucket == "down"
+		{
+			"Hey! I still need you to get the bucket!"
+			"Can you please get the bucket?"
+			"You know I can't do much until you empty the bucket, right?"
+		}
+		else
+		{
+			"I still need the bucket back!"
+			"Are you done emptying the bucket?"
+		}
+	}
+	elseif breaknow == 1 //hanging out dialogue
+	{
+		"So, what do you normally do? I do plenty of scouting and mining, but mostly it's planning and managing digs. I've studied rock types and underground ecosystems my whole life."
+		"It's a nice day out."
+		"I don't usually spend a lot of time on the surface, but it can be nice sometimes."
+		"Ah... I like the breeze."
+		"No matter how much time I spend on the surface, I still hate it when the sun's this bright."
+		"There's already a human mine out here, but they haven't dug very deep. Not nearly as deep as I'll be going, anyway. Nothing's been a surprise yet because of that, though."
+	}
+	else //normal mining dialogue
+	{
+		"Damn, hit a patch of harder stone."
+		"Sometimes I wish I could sing working songs. I'd just like to know what it's like, at least!"
+		"Ah damn, not ANOTHER stone stuck in my hair."
+		"The soil here isn't bad."
+		"Hello, little worm. Let's just get you out of my way..."
+		"It's not very much, but the ground's a little more magical here than the average. I wonder why that is? Magic's hardly my specialty."
+		"How are things up there?"
+		"Oh, I think that's a fossil- Aw, it's tiny. No one'll buy it. Still a good sample though, I'll hold onto it."
+	}
+}
+
+OnAlert
+{
+	if bucketitem != "empty" && bucket == "down"
+	{
+		if bucketitem == "dirt"
+		{
+			"Bucket's full, you're gonna need to empty it."
+			"Bucket's full."
+			"Bucket's full!"
+			"Alright, no more bucket space."
+		}
+		elseif bucketitem == "fossil1"
+		{
+			"Found a pretty well preserved fossil, I think we could sell it. Bring it up, please!"
+		}
+		elseif bucketitem == "quartz"
+		{
+			"Ooo, got a decent chunk of quartz. You should grab that."
+		}
+	}
+	elseif breaknow == 1 && breakend == 0
+	{
+		"Okay, I'm gonna take a bit of a break."
+		"I'm gonna take a break, I'll be up in a sec."
+		--
+		"\w8\w8\w8\w8\s[2]\n\n"
+		--
+		"Hi!"
+		"How's it going up here?"
+	}
+	elseif breaknow == 0 && breakstart == 0
+	{
+		"Alright, break time's over. Back to work!"
+		"I'm itching to get back down there, see you later!"
+		--
+		"\w8\w8\s[0]"
+	}
+}
+
+OnStatusUpdate
+{
+	if bucketitem != "empty"
+	{
+		if bucket == "down"; "I still need you to get the bucket!"
+		else; "I need the bucket back!"
+	}
+	else; "It's going good, I'm making decent progress."
+}
+
+OnIntro : all
+{
+	"\n\nBy the way, you might have guessed, but I can't talk. So I communicate through this enchanted scroll instead. I got this one made so you can talk to me through it, too, no matter how deep I am. Should make it easier to communicate as we go.\n\nAnyway, sorry, I couldn't wait to break ground. But it'll go quicker now that you're here! Basically, as I go, I'll fill up a bucket with removed dirt. Your job is to pull it up and empty it so I can keep going. Simple, but I'll certainly appreciate not having to carry it up every damn time.\n\nSo... if you don't mind, I'm gonna get back to it!\![leave,passivemode]\w8\w8\w8\s[0]"
+	
+	szekup = "down"
+}

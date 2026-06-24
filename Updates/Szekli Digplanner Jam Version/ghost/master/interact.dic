@@ -1,0 +1,97 @@
+OnMouseClick
+{
+	if reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		if reference4 == "rope" || reference4 == "rope2" //ref4 is collisions
+		{
+			OnBucketTake
+		}
+		elseif reference4 == "bucket"
+		{
+			OnBucketEmpty
+		}
+	}
+}
+
+OnMouseDoubleClick
+{
+	if reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		OnSakuraMenu
+	}
+}
+
+OnBucketTake
+{
+	
+	if bucket == "down" && bucketitem == "empty"
+	{
+		"Hey, I'm still using that!"
+		"Not full yet!"
+	}
+	elseif bucket == "down" && bucketitem == "dirt"
+	{
+		bucket = "up"
+		OnSurfaceRestore
+	}
+	elseif bucket == "down" && bucketitem == "fossil1"
+	{
+		bucket = "up"
+		OnSurfaceRestore
+	}
+	elseif bucket == "down" && bucketitem == "quartz"
+	{
+		bucket = "up"
+		OnSurfaceRestore
+	}
+	elseif bucket == "up" && bucketitem == "empty"
+	{
+		bucket = "down"
+		patience = 0
+		OnSurfaceRestore
+		--
+		"Thanks!"
+		"Got the bucket, thanks!"
+		"Thanks."
+		"Got it."
+	}
+}
+
+OnBucketEmpty
+{
+	if bucket == "up" && bucketitem == "dirt"
+	{
+		bucketitem = "empty"
+		OnSurfaceRestore
+	}
+	elseif bucket == "up" && bucketitem == "fossil1"
+	{
+		bucketitem = "empty"
+		bucketfillamount = 0
+		fossil1 += 1
+		OnSurfaceRestore
+	}
+	elseif bucket == "up" && bucketitem == "quartz"
+	{
+		bucketitem = "empty"
+		bucketfillamount = 0
+		quartz += 1
+		OnSurfaceRestore
+	}
+}
+
+//Keybinds
+OnKeyPress
+{
+	if reference0 == "f1"; "\![open,readme]"
+	elseif reference0 == "t"; OnAiTalk
+	elseif reference0 == "r"; OnLastTalk
+	elseif reference0 == "f11" && devmode == 1; OnMinuteChange
+	elseif reference0 == "f12"
+	{
+		if devmode == 0; devmode = 1
+		else; devmode = 0
+		
+		"Dev mode toggled."
+	}
+}

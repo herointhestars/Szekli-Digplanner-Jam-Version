@@ -1,0 +1,5 @@
+charset,UTF-8
+type,ghost
+
+name,Szekli Digplanner Jam Version
+directory,Szekli Digplanner Jam Version

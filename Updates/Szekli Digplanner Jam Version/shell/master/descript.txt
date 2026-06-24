@@ -1,0 +1,10 @@
+charset,UTF-8
+type,shell
+
+name,Default Shell
+craftman,The Nameless One
+craftmanw,The Nameless One
+craftmanurl,https://the-nameless-one-does-art.tumblr.com/
+
+seriko.alignmenttodesktop,free
+seriko.use_self_alpha,1

@@ -1,0 +1,69 @@
+OnMinuteChange : all
+{
+	if bucketitem == "empty" && bucket == "down" && breaknow == 0
+	{
+		bucketfillamount += 1
+		itemtime += 1
+		breakstart += 1
+	}
+	elseif breaknow == 0; patience += 1
+	else; breakend += 1
+	
+	if itemtime >= 15
+	{
+		itemcheck = RAND(3)
+		if itemcheck == 1
+		{
+			bucketitem = "fossil1"
+			itemtime = 0
+			OnAlert
+		}
+		elseif itemcheck == 2
+		{
+			bucketitem = "quartz"
+			itemtime = 0
+			OnAlert
+		}
+		elseif bucketfillamount >= 8
+		{
+			bucketfillamount = 0
+			bucketitem = "dirt"
+			OnAlert
+		}
+		
+	}
+	elseif breakstart >= 31 
+	{
+		szekup = "peek"
+		breakstart = 0
+		breaknow = 1
+		OnAlert
+	}
+	elseif breakend >= 11
+	{
+		szekup = "down"
+		breakend = 0
+		breaknow = 0
+		OnAlert
+	}
+	elseif bucketfillamount >= 8
+	{
+		bucketfillamount = 0
+		bucketitem = "dirt"
+		OnAlert
+	}
+}
+
+OnCheatBreak
+{
+	if breaknow == 1
+	{
+		breakend = 11
+	}
+	else
+	{
+		breakstart = 31
+	}
+	
+	OnMinuteChange
+}

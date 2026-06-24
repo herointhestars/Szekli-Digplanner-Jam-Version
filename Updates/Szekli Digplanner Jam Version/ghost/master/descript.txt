@@ -1,0 +1,17 @@
+charset,UTF-8
+
+name,Szekli Digplanner Jam Version
+type,ghost
+
+shiori,yaya.dll
+
+craftman,The Nameless One
+craftmanw,The Nameless One
+craftmanurl,https://the-nameless-one-does-art.tumblr.com/
+
+sakura.name,Szekli
+kero.name,Szekli
+
+icon,icon.ico
+
+sstp.allowunspecifiedsend,0

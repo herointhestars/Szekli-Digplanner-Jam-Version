@@ -1,0 +1,75 @@
+//Naming:
+
+//Surfaces:
+	//0: bucket down
+	//1: bucket up
+		//anim0: dirt
+		//anim1: stone
+		//anim2: fossil1
+	//2: Szekli in hole
+		//anims expressions
+	//3: Szekli standing (hole not visible)
+	
+//Images:
+	//each surface base image just its number
+	//animations: [surface number] [0] [animation number] (if applicable) [0] [frame number]
+	//eg surface001012
+	//make sense? I hope so
+
+//Collisions needed:
+	//bucket
+	//rope when bucket down
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+//Bucket in hole
+surface0
+{
+	collision0,424,169,458,214,rope
+	collision1,318,183,423,195,rope2
+}
+
+//Bucket pulled up
+surface1
+{
+	//full of dirt
+	animation0.interval,never
+	animation0.pattern0,overlay,100,0,0,0
+	
+	//fossil1
+	animation1.interval,never
+	animation1.pattern0,overlay,101,0,0,0
+	
+	//quartz
+	animation2.interval,never
+	animation2.pattern0,overlay,102,0,0,0
+	
+	collision0,327,111,392,183,bucket
+	collision1,424,169,458,214,rope
+	collision2,318,183,423,195,rope2
+}
+
+//Szekli in hole (bucket down)
+surface2
+{
+	
+}
+
+//Szekli alone
+surface3
+{
+	
+}
+
+//—————————————————————————————— Kero surfaces ——————————————————————————————
+
+//fuck you kero I hate all keros
+surface10
+{
+	
+}

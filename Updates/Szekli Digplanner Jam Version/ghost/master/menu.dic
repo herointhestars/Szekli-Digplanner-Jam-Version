@@ -1,0 +1,74 @@
+//Because there is an all modifier here, you don't need to write -- between menu options
+OnSakuraMenu : all
+{
+	"\b[2]\_q\![set,autoscroll,disable]"
+	
+	"\![*]\q[Chat,OnAiTalk]  "
+	switch LastTalk == "" //Uses top option if there is a dialogue to repeat
+	{
+		"\![*]\q[Read last message,OnLastTalk]"
+		"\![*]\f[color,disable]Read last message\f[color,default]"
+	}
+	"\n\n"
+	
+	"\![*]\q[Status update?,OnStatusUpdate]"
+	
+	"\n\n"
+	
+	"\![*]\q[Inventory,OnInventory]  "
+	
+	"\n\n"
+	
+	if devmode == 1
+	{
+		"\![*]\q[Reset,OnFirstBoot]  \n\n"
+		
+		"\![*]\q[Toggle Break,OnCheatBreak]  \n\n"
+	}
+	
+	"\![*]\q[Change talk rate,OnTalkRateMenu]\n\n"
+	
+	"\![*]\q[Done,blank]"	
+}
+
+OnInventory : all
+{
+	"\b[2\_q]\![set,autoscroll,disable]"
+	"You have:\n\n"
+	"Shell Fossil x%(fossil1)\n"
+	"Quartz x%(quartz)"
+}
+
+OnTalkRateMenu : all
+{	
+	//This is just setting up a label, you may need to add to it or tweak it if you change what rates are available
+	_talkrate = "Off"
+	if aitalkinterval == 30; _talkrate = "30 seconds"
+	elseif aitalkinterval == 60; _talkrate = "1 minute"
+	elseif aitalkinterval == 180; _talkrate = "3 minutes"
+	elseif aitalkinterval == 300; _talkrate = "5 minutes"
+	elseif aitalkinterval == 600; _talkrate = "10 minutes"
+	
+	"\b[2]\![set,autoscroll,disable]\_q"
+	"Current interval: %(_talkrate)\n\n"
+	
+	"\![*]\q[Off,OnTalkRateChange,0]\n"
+	"\![*]\q[30 seconds,OnTalkRateChange,30]\n"
+	"\![*]\q[1 minute,OnTalkRateChange,60]\n"
+	"\![*]\q[3 minutes,OnTalkRateChange,180]\n"
+	"\![*]\q[5 minutes,OnTalkRateChange,300]\n"
+	"\![*]\q[10 minutes,OnTalkRateChange,600]\n"
+	"\n"
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\q[Done,blank]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+	OnTalkRateMenu
+}
+
+OnLastTalk
+{
+	LastTalk
+}
